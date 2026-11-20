@@ -1,9 +1,6 @@
 [build-system]
-requires = [
-    "setuptools>=45",
-    "wheel"
-]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling", "uv-dynamic-versioning"]
+build-backend = "hatchling.build"
 
 [project]
 name = "pythonmaths"
@@ -29,7 +26,7 @@ dependencies = [
 Source = "https://github.com/<owner-account>/python-math"
 Bug_Tracker = "https://github.com/<owner-account>/python-math/issues"
 
-[project.optional-dependencies]
+[dependency-groups]
 tests = [
   "pytest",
   "pytest-cov",
@@ -37,6 +34,7 @@ tests = [
   "pytest-mpl"
 ]
 dev = [
+  { include-group = "tests"},
   "black",
   "flake8",
   "ipython",
@@ -45,6 +43,7 @@ dev = [
   "pylint",
   "pyupgrade",
   "ruff",
+  "ty",
 ]
 
 [tool.setuptools]
@@ -63,7 +62,7 @@ namespaces = false
 write_to = "pythonmaths/_version.py"
 
 [tool.pytest.ini_options]
-minversion = "8.0"
+minversion = "9.0"
 addopts = ["--cov", "--mpl", "-ra", "--strict-config", "--strict-markers"]
 log_cli_level = "Info"
 testpaths = [
@@ -86,7 +85,7 @@ omit = [
 
 [tool.black]
 line-length = 120
-target-version = ['py38']
+target-version = ['py314']
 exclude = '''
 
 (
@@ -126,7 +125,7 @@ exclude = [
 ]
 # per-file-ignores = []
 line-length = 120
-target-version = "py310"
+target-version = "py314"
 lint.select = [
   "A", # flake8-builtins
   "B", # flake8-bugbear
@@ -226,3 +225,6 @@ override_SS05 = [  # override SS05 to allow docstrings starting with these words
     "^Assess ",
     "^Access ",
 ]
+
+[tool.hatch.version]
+source = "uv-dynamic-versioning"
