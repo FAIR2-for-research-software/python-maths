@@ -63,7 +63,7 @@ write_to = "pythonmaths/_version.py"
 
 [tool.pytest.ini_options]
 minversion = "9.0"
-addopts = ["--cov", "--mpl", "-ra", "--strict-config", "--strict-markers"]
+addopts = ["--cov", "--mpl", "-ra", "--strict-config", "--strict-markers", "--doctest-modules"]
 log_cli_level = "Info"
 testpaths = [
     "tests",
