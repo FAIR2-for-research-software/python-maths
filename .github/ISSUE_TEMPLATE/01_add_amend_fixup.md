@@ -72,6 +72,16 @@ git add -u
 git commit -m "docs: Adding examples to add() docstring"
 ```
 
+### Run tests in the docstring
+
+Run `pytest` on the docstrings in `pythonmaths/arithmetic.py` using the following.
+
+```bash
+pytest --doctest-modules pythonmaths/arithmetic.py
+```
+
+Look very closely at the _first_ error reported for the `pythonmaths.arithmetic.add` function.
+
 ### Correct the spelling error
 
 Did you spot it? The example above had `arithmatic` instead of `arithmetic` in the import line. Correct this in the
@@ -86,7 +96,7 @@ docstring so it reads as shown below.
 Rather than making a new commit amend the previous commit with the change.
 
 ```bash
-git add -u
+git add -u .
 git commit --amend
 ```
 
@@ -107,27 +117,29 @@ Add another example to the `Examples` section of the `add()` function in the `py
 
 ### Commit the change as a fixup
 
-You need to know the hash of the commit made above that you amended (use `git log --oneline`) or you can use the
-relative reference `HEAD~1`
+You need to know the hash of the commit made above that you amended (use `git log --oneline` or your `git lol` alias) or
+you can use the relative reference `HEAD~1` to refer to it.
 
 ```bash
-git add -u
+git add -u .
 git commit --fixup HEAD~1
 ```
 
 ### Perform an interactive rebase to automatically squash the changes
 
 You will either need the hash of the commit _before_ the one you are fixing up (use `git log` to find this) or
-you can use `HEAD~2` (the fixup itself is currently a commit and so you have to go back an extra commit relative to
+you can use `HEAD~3` (the fixup itself is currently a commit and so you have to go back an extra commit relative to
 `HEAD`).
 
 ```bash
 git rebase -i --autosquash HEAD~3
 ```
 
-A text editor should open and the commit with the message staring `fixup!` should have `fixup` and not `pick` next to
+A text editor should open and the commit with the message starting `fixup!` should have `fixup` and not `pick` next to
 it. If that isn't the case change it to `fixup`. Save the file and exit the text editor (this should be `nano` in which
 case use `Ctrl + o` followed by `Ctrl + x`).
+
+Git should report that the Fixup has been squashed.
 
 ### Remove the empty commit and push your changes
 

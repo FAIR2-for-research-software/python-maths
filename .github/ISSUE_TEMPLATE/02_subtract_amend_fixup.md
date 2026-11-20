@@ -71,6 +71,15 @@ git add -u
 git commit -m "feature: Adds examples to subtract() function docstring"
 ```
 
+### Run tests in the docstring
+
+Run `pytest` on the docstrings in `pythonmaths/arithmetic.py` using the following.
+
+```bash
+pytest --doctest-modules pythonmaths/arithmetic.py
+```
+Look very closely at the _first_ error reported for the `pythonmaths.arithmetic.subtract` function.
+
 ### Correct the spelling error
 
 Did you spot it? The example above had `artihmatic` instead of `arithmetic` in the import line. Correct this in the
@@ -85,7 +94,7 @@ docstring so it reads as shown below.
 Rather than making a new commit amend the previous commit with the change.
 
 ```bash
-git add -u
+git add -u .
 git commit --amend
 ```
 
@@ -108,7 +117,7 @@ You need to know the hash of the commit made above that you amended (use `git lo
 relative reference `HEAD~1`
 
 ```bash
-git add -u
+git add -u .
 git commit --fixup HEAD~1
 ```
 
